@@ -15,10 +15,48 @@
     let cart = []; // Carrito de compras
 
     // ============================================
+    // Carrito Persistente con localStorage
+    // ============================================
+    
+    const CART_STORAGE_KEY = 'laperuvianita_cart';
+    
+    function saveCartToStorage() {
+        try {
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+        } catch (e) {
+            console.warn('No se pudo guardar el carrito:', e);
+        }
+    }
+    
+    function loadCartFromStorage() {
+        try {
+            const saved = localStorage.getItem(CART_STORAGE_KEY);
+            if (saved) {
+                cart = JSON.parse(saved);
+                updateCartDisplay();
+            }
+        } catch (e) {
+            console.warn('No se pudo cargar el carrito:', e);
+            cart = [];
+        }
+    }
+    
+    function clearCartStorage() {
+        try {
+            localStorage.removeItem(CART_STORAGE_KEY);
+        } catch (e) {
+            console.warn('No se pudo limpiar el carrito:', e);
+        }
+    }
+
+    // ============================================
     // Inicialización
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
         console.log('LaPeruvianita Shoes - Tienda Online Cargada');
+        
+        // Cargar carrito desde localStorage
+        loadCartFromStorage();
         
         // Configurar event listeners
         setupEventListeners();
@@ -41,9 +79,57 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeAllModals();
+                closeMobileMenu();
             }
         });
+
+        // Menú móvil - abrir al hacer click en hamburguesa
+        const hamburgerBtn = document.querySelector('.hamburger-btn');
+        if (hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', toggleMobileMenu);
+        }
+
+        // Mobile menu overlay click to close
+        const mobileMenu = document.querySelector('.mobile-menu');
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', closeMobileMenu);
+        }
+
+        // Mobile menu close button
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
     }
+
+    // ============================================
+    // Funciones del Menú Móvil
+    // ============================================
+    function toggleMobileMenu() {
+        const hamburgerBtn = document.querySelector('.hamburger-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!hamburgerBtn || !mobileMenu) return;
+        
+        hamburgerBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+        const hamburgerBtn = document.querySelector('.hamburger-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        if (!hamburgerBtn || !mobileMenu) return;
+        
+        hamburgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Funciones globales para el menú móvil
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
 
     // ============================================
     // Funciones de Navegación por Categorías
@@ -351,6 +437,7 @@
         };
         
         cart.push(product);
+        saveCartToStorage(); // Guardar en localStorage
         updateCartDisplay();
         showNotification('¡Agregado al carrito! 🛒', 'success');
     };
@@ -365,6 +452,8 @@
         
         // Eliminar del array
         cart = cart.filter(function(item) { return item.id !== productId; });
+        
+        saveCartToStorage(); // Guardar en localStorage
         
         // Actualizar visualización
         updateCartDisplay();
@@ -412,8 +501,28 @@
         // Actualizar badge del carrito
         const cartBadge = document.getElementById('cart-count');
         if (cartBadge) {
-            cartBadge.textContent = cart.length;
-            cartBadge.style.display = cart.length > 0 ? 'flex' : 'none';
+            var oldCount = parseInt(cartBadge.textContent) || 0;
+            var newCount = cart.length;
+            
+            cartBadge.textContent = newCount;
+            cartBadge.style.display = newCount > 0 ? 'flex' : 'none';
+            
+            // Animación si hay cambio
+            if (newCount !== oldCount) {
+                cartBadge.classList.add('updated');
+                setTimeout(function() {
+                    cartBadge.classList.remove('updated');
+                }, 300);
+                
+                // Animación del ícono del carrito
+                var cartBtn = document.querySelector('.cart-icon-btn');
+                if (cartBtn) {
+                    cartBtn.classList.add('bump');
+                    setTimeout(function() {
+                        cartBtn.classList.remove('bump');
+                    }, 300);
+                }
+            }
         }
     }
 
@@ -639,7 +748,7 @@
     };
 
     /**
-     * Finaliza la compra
+     * Finaliza la compra - Abre el proceso de checkout
      */
     window.checkout = function() {
         if (cart.length === 0) {
@@ -647,25 +756,295 @@
             return;
         }
         
-        if (!currentUserEmail) {
-            showNotification('Por favor, inicia sesión para completar tu compra', 'error');
-            closeCart();
-            openLoginModal();
-            return;
-        }
+        // Abrir el modal de checkout
+        openCheckout();
+    };
+    
+    /**
+     * Abre el modal de checkout
+     */
+    window.openCheckout = function() {
+        closeCart();
+        const modal = document.getElementById('checkoutModal');
+        if (!modal) return;
         
-        // Registrar cada producto en el sistema
-        cart.forEach(function(item) {
-            logClientAction(currentUserEmail, 'register_purchase', item.name + ' (Talla: ' + item.size + ')');
+        // Resetear el checkout al primer paso
+        resetCheckout();
+        
+        // Mostrar modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    };
+    
+    /**
+     * Cierra el modal de checkout
+     */
+    window.closeCheckout = function() {
+        const modal = document.getElementById('checkoutModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+        document.body.style.overflow = '';
+    };
+    
+    /**
+     * Resetea el proceso de checkout
+     */
+    function resetCheckout() {
+        // Resetear todos los steps
+        document.querySelectorAll('.checkout-step').forEach(function(step) {
+            step.classList.remove('active');
+        });
+        document.querySelectorAll('.progress-step').forEach(function(step) {
+            step.classList.remove('active', 'completed');
         });
         
-        var total = cart.reduce(function(sum, item) { return sum + item.price; }, 0);
-        showNotification('¡Compra exitosa! Total: S/ ' + total.toFixed(2), 'success');
+        // Ir al step 1
+        goToStep(1);
+    }
+    
+    /**
+     * Navega a un paso específico del checkout
+     */
+    window.goToStep = function(stepNumber) {
+        // Validar datos del paso 1 antes de ir al paso 2
+        if (stepNumber === 2) {
+            if (!validateStep1()) return;
+        }
         
-        // Limpiar carrito
-        cart = [];
-        updateCartDisplay();
-        closeCart();
+        // Validar método de envío antes de ir al paso 3
+        if (stepNumber === 3) {
+            if (!validateStep2()) return;
+        }
+        
+        // Validar método de pago antes de ir al paso 4
+        if (stepNumber === 4) {
+            if (!validateStep3()) return;
+            // Generar resumen del pedido
+            generateOrderSummary();
+        }
+        
+        // Actualizar UI
+        document.querySelectorAll('.checkout-step').forEach(function(step) {
+            step.classList.remove('active');
+        });
+        document.querySelectorAll('.progress-step').forEach(function(step) {
+            step.classList.remove('active');
+            var stepNum = parseInt(step.dataset.step);
+            if (stepNum < stepNumber) {
+                step.classList.add('completed');
+            } else if (stepNum === stepNumber) {
+                step.classList.add('active');
+            }
+        });
+        
+        var currentStep = document.getElementById('checkoutStep' + stepNumber);
+        if (currentStep) {
+            currentStep.classList.add('active');
+        }
+        
+        // Scroll al inicio del modal
+        var modal = document.querySelector('.checkout-modal');
+        if (modal) modal.scrollTop = 0;
+    };
+    
+    /**
+     * Valida el paso 1 - Datos del cliente
+     */
+    function validateStep1() {
+        var name = document.getElementById('customerName').value.trim();
+        var email = document.getElementById('customerEmail').value.trim();
+        var phone = document.getElementById('customerPhone').value.trim();
+        var dni = document.getElementById('customerDni').value.trim();
+        var address = document.getElementById('customerAddress').value.trim();
+        var city = document.getElementById('customerCity').value;
+        var district = document.getElementById('customerDistrict').value.trim();
+        
+        if (!name || !email || !phone || !dni || !address || !city || !district) {
+            showNotification('Por favor, completa todos los campos requeridos', 'error');
+            return false;
+        }
+        
+        // Validar email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Por favor, ingresa un correo electrónico válido', 'error');
+            return false;
+        }
+        
+        // Validar DNI (8 dígitos)
+        if (dni.length !== 8 || !/^\d+$/.test(dni)) {
+            showNotification('El DNI debe tener 8 dígitos', 'error');
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Valida el paso 2 - Envío
+     */
+    function validateStep2() {
+        var shipping = document.querySelector('input[name="shipping"]:checked');
+        if (!shipping) {
+            showNotification('Por favor, selecciona un método de envío', 'error');
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Valida el paso 3 - Pago
+     */
+    function validateStep3() {
+        var payment = document.querySelector('input[name="payment"]:checked');
+        if (!payment) {
+            showNotification('Por favor, selecciona un método de pago', 'error');
+            return false;
+        }
+        
+        var paymentValue = payment.value;
+        
+        // Validar campos de tarjeta
+        if (paymentValue === 'card') {
+            var cardNumber = document.getElementById('cardNumber').value.trim();
+            var cardExpiry = document.getElementById('cardExpiry').value.trim();
+            var cardCvv = document.getElementById('cardCvv').value.trim();
+            var cardName = document.getElementById('cardName').value.trim();
+            
+            if (!cardNumber || !cardExpiry || !cardCvv || !cardName) {
+                showNotification('Por favor, completa los datos de tu tarjeta', 'error');
+                return false;
+            }
+        }
+        
+        // Validar referencia Yape
+        if (paymentValue === 'yape') {
+            var yapeRef = document.getElementById('yapeReference').value.trim();
+            if (!yapeRef) {
+                showNotification('Por favor, ingresa el número de operación', 'error');
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Actualiza el costo de envío según la opción seleccionada
+     */
+    window.updateShippingCost = function() {
+        var shipping = document.querySelector('input[name="shipping"]:checked');
+        if (!shipping) return 0;
+        
+        var costs = {
+            'standard': 15,
+            'express': 25,
+            'store': 0
+        };
+        
+        return costs[shipping.value] || 0;
+    };
+    
+    /**
+     * Muestra/oculta campos de pago según el método seleccionado
+     */
+    window.togglePaymentFields = function() {
+        var payment = document.querySelector('input[name="payment"]:checked');
+        if (!payment) return;
+        
+        var cardFields = document.getElementById('cardPaymentFields');
+        var yapeFields = document.getElementById('yapePaymentFields');
+        
+        if (cardFields) cardFields.style.display = payment.value === 'card' ? 'block' : 'none';
+        if (yapeFields) yapeFields.style.display = payment.value === 'yape' ? 'block' : 'none';
+    };
+    
+    /**
+     * Genera el resumen del pedido para el paso 4
+     */
+    function generateOrderSummary() {
+        // Datos del cliente
+        document.getElementById('summaryName').textContent = document.getElementById('customerName').value;
+        document.getElementById('summaryEmail').textContent = document.getElementById('customerEmail').value;
+        document.getElementById('summaryPhone').textContent = document.getElementById('customerPhone').value;
+        document.getElementById('summaryAddress').textContent = 
+            document.getElementById('customerAddress').value + ', ' + 
+            document.getElementById('customerDistrict').value + ', ' + 
+            document.getElementById('customerCity').options[document.getElementById('customerCity').selectedIndex].text;
+        
+        // Envío
+        var shipping = document.querySelector('input[name="shipping"]:checked');
+        var shippingText = 'Envío Regular';
+        var shippingCost = 15;
+        if (shipping) {
+            if (shipping.value === 'express') {
+                shippingText = 'Envío Express';
+                shippingCost = 25;
+            } else if (shipping.value === 'store') {
+                shippingText = 'Recojo en Tienda';
+                shippingCost = 0;
+            }
+        }
+        document.getElementById('summaryShipping').textContent = shippingText + ' - S/ ' + shippingCost.toFixed(2);
+        
+        // Pago
+        var payment = document.querySelector('input[name="payment"]:checked');
+        var paymentText = 'Tarjeta';
+        if (payment) {
+            if (payment.value === 'yape') paymentText = 'Yape / Plin';
+            else if (payment.value === 'cash') paymentText = 'Efectivo contra entrega';
+        }
+        document.getElementById('summaryPayment').textContent = paymentText;
+        
+        // Productos
+        var productsHtml = '';
+        cart.forEach(function(item) {
+            productsHtml += '<div class="summary-product-item">' +
+                '<span>' + item.name + ' (Talla: ' + item.size + ')</span>' +
+                '<span>S/ ' + item.price.toFixed(2) + '</span>' +
+            '</div>';
+        });
+        document.getElementById('summaryProducts').innerHTML = productsHtml || '<p>No hay productos</p>';
+        
+        // Totales
+        var subtotal = cart.reduce(function(sum, item) { return sum + item.price; }, 0);
+        document.getElementById('summarySubtotal').textContent = 'S/ ' + subtotal.toFixed(2);
+        document.getElementById('summaryShippingCost').textContent = 'S/ ' + shippingCost.toFixed(2);
+        document.getElementById('summaryTotal').textContent = 'S/ ' + (subtotal + shippingCost).toFixed(2);
+    }
+    
+    /**
+     * Finaliza la compra
+     */
+    window.finalizeOrder = function() {
+        // Simular procesamiento
+        showNotification('Procesando tu pedido...', 'info');
+        
+        setTimeout(function() {
+            var subtotal = cart.reduce(function(sum, item) { return sum + item.price; }, 0);
+            var shippingCost = updateShippingCost();
+            var total = subtotal + shippingCost;
+            
+            // Registrar la compra
+            var customerEmail = document.getElementById('customerEmail').value;
+            if (customerEmail) {
+                cart.forEach(function(item) {
+                    logClientAction(customerEmail, 'register_purchase', item.name + ' (Talla: ' + item.size + ')');
+                });
+            }
+            
+            // Mostrar éxito
+            showNotification('🎉 ¡Pedido confirmado! Total: S/ ' + total.toFixed(2), 'success');
+            
+            // Limpiar carrito
+            cart = [];
+            clearCartStorage();
+            updateCartDisplay();
+            
+            // Cerrar checkout
+            closeCheckout();
+        }, 1500);
     };
 
     // ============================================
@@ -914,5 +1293,176 @@
             }
         }
     };
+
+    /**
+     * Maneja la búsqueda desde el input móvil
+     */
+    window.handleMobileSearch = function(event) {
+        clearTimeout(window.searchTimeout);
+        
+        window.searchTimeout = setTimeout(function() {
+            const searchTerm = event.target.value.trim();
+            
+            if (searchTerm.length > 0) {
+                // Sincronizar con el input principal
+                const mainInput = document.getElementById('searchInput');
+                if (mainInput) mainInput.value = searchTerm;
+                
+                searchProducts(searchTerm);
+            } else {
+                filterProducts('all', event);
+            }
+        }, 300);
+    };
+
+    // ============================================
+    // Filtros Avanzados
+    // ============================================
+    
+    /**
+     * Aplica filtro de precio
+     */
+    window.applyPriceFilter = function(priceRange) {
+        const cards = document.querySelectorAll('.product-card');
+        
+        cards.forEach(card => {
+            if (priceRange === 'all') {
+                card.classList.remove('hidden-by-price');
+                return;
+            }
+            
+            const priceText = card.querySelector('.product-price');
+            if (!priceText) return;
+            
+            // Extraer precio del texto
+            const priceMatch = priceText.textContent.match(/S\/\s?([\d.]+)/);
+            if (!priceMatch) return;
+            
+            const price = parseFloat(priceMatch[1]);
+            let minPrice = 0, maxPrice = Infinity;
+            
+            if (priceRange === '600+') {
+                minPrice = 600;
+            } else {
+                const range = priceRange.split('-');
+                minPrice = parseFloat(range[0]);
+                maxPrice = parseFloat(range[1]);
+            }
+            
+            if (price >= minPrice && price < maxPrice) {
+                card.classList.remove('hidden-by-price');
+            } else {
+                card.classList.add('hidden-by-price');
+            }
+        });
+        
+        updateFiltersVisibility();
+    };
+    
+    /**
+     * Aplica filtro de marca
+     */
+    window.applyBrandFilter = function(brand) {
+        const cards = document.querySelectorAll('.product-card');
+        
+        cards.forEach(card => {
+            if (brand === 'all') {
+                card.classList.remove('hidden-by-brand');
+                return;
+            }
+            
+            const cardBrand = card.getAttribute('data-brand');
+            
+            if (cardBrand && cardBrand.toLowerCase() === brand.toLowerCase()) {
+                card.classList.remove('hidden-by-brand');
+            } else {
+                card.classList.add('hidden-by-brand');
+            }
+        });
+        
+        updateFiltersVisibility();
+    };
+    
+    /**
+     * Aplica ordenamiento
+     */
+    window.applySort = function(sortType) {
+        const grid = document.getElementById('productsGrid');
+        if (!grid) return;
+        
+        const cards = Array.from(document.querySelectorAll('.product-card'));
+        
+        cards.sort((a, b) => {
+            const priceA = extractPrice(a);
+            const priceB = extractPrice(b);
+            const nameA = a.querySelector('.product-title')?.textContent || '';
+            const nameB = b.querySelector('.product-title')?.textContent || '';
+            
+            switch(sortType) {
+                case 'price-asc':
+                    return priceA - priceB;
+                case 'price-desc':
+                    return priceB - priceA;
+                case 'name-asc':
+                    return nameA.localeCompare(nameB);
+                case 'name-desc':
+                    return nameB.localeCompare(nameA);
+                default:
+                    return 0;
+            }
+        });
+        
+        // Reordenar en el DOM
+        cards.forEach(card => grid.appendChild(card));
+    };
+    
+    /**
+     * Extrae el precio de una tarjeta
+     */
+    function extractPrice(card) {
+        const priceText = card.querySelector('.product-price');
+        if (!priceText) return 0;
+        const match = priceText.textContent.match(/S\/\s?([\d.]+)/);
+        return match ? parseFloat(match[1]) : 0;
+    }
+    
+    /**
+     * Limpia todos los filtros
+     */
+    window.clearFilters = function() {
+        // Resetear selects
+        document.getElementById('priceFilter').value = 'all';
+        document.getElementById('brandFilter').value = 'all';
+        document.getElementById('sortFilter').value = 'default';
+        
+        // Remover clases de hide
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.classList.remove('hidden-by-price', 'hidden-by-brand');
+        });
+        
+        // Resetear búsqueda
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        
+        filterProducts('all');
+    };
+    
+    /**
+     * Actualiza visibilidad basada en todos los filtros
+     */
+    function updateFiltersVisibility() {
+        const cards = document.querySelectorAll('.product-card');
+        
+        cards.forEach(card => {
+            const hasPriceFilter = card.classList.contains('hidden-by-price');
+            const hasBrandFilter = card.classList.contains('hidden-by-brand');
+            
+            if (hasPriceFilter || hasBrandFilter) {
+                card.style.display = 'none';
+            } else {
+                card.style.display = '';
+            }
+        });
+    }
 
 })();

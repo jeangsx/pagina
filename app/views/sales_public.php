@@ -50,6 +50,11 @@
             </ul>
 
             <div class="header-actions">
+                <button class="hamburger-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="Buscar zapatillas..." onkeyup="handleSearch(event)" onkeydown="if(event.key==='Enter'){triggerSearch();}">
                     <span class="search-icon" onclick="triggerSearch()" style="cursor:pointer;">🔍</span>
@@ -62,6 +67,29 @@
             </div>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+            <ul class="mobile-nav-links">
+                <li><a onclick="showNuevo(event); closeMobileMenu();">Nuevo</a></li>
+                <li><a onclick="showHombres(event); closeMobileMenu();">Hombres</a></li>
+                <li><a onclick="showMujeres(event); closeMobileMenu();">Mujeres</a></li>
+                <li><a onclick="showNinos(event); closeMobileMenu();">Niños</a></li>
+                <li><a onclick="filterProducts('running', event); closeMobileMenu();">Running</a></li>
+                <li><a onclick="filterProducts('urban', event); closeMobileMenu();">Urbanas</a></li>
+                <li><a onclick="filterProducts('basketball', event); closeMobileMenu();">Basketball</a></li>
+                <li><a onclick="filterProducts('formal', event); closeMobileMenu();">Formales</a></li>
+                <li><a onclick="filterProducts('training', event); closeMobileMenu();">Training</a></li>
+                <li><a onclick="filterProducts('kids', event); closeMobileMenu();">Niños</a></li>
+                <li><a onclick="showOfertas(event); closeMobileMenu();">Ofertas</a></li>
+            </ul>
+            <div class="mobile-search">
+                <input type="text" id="mobileSearchInput" placeholder="Buscar zapatillas..." onkeyup="handleMobileSearch(event)" onkeydown="if(event.key==='Enter'){triggerSearch(); closeMobileMenu();}">
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Banner -->
     <section class="hero-banner">
@@ -96,6 +124,44 @@
         </div>
     </div>
 
+    <!-- Filtros Avanzados -->
+    <div class="filters-bar">
+        <div class="filters-container">
+            <div class="filter-group">
+                <label>Precio:</label>
+                <select id="priceFilter" onchange="applyPriceFilter(this.value)">
+                    <option value="all">Todos los precios</option>
+                    <option value="0-200">S/ 0 - S/ 200</option>
+                    <option value="200-400">S/ 200 - S/ 400</option>
+                    <option value="400-600">S/ 400 - S/ 600</option>
+                    <option value="600+">S/ 600+</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Marca:</label>
+                <select id="brandFilter" onchange="applyBrandFilter(this.value)">
+                    <option value="all">Todas las marcas</option>
+                    <option value="nike">Nike</option>
+                    <option value="adidas">Adidas</option>
+                    <option value="puma">Puma</option>
+                    <option value="reebok">Reebok</option>
+                    <option value="newbalance">New Balance</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Ordenar:</label>
+                <select id="sortFilter" onchange="applySort(this.value)">
+                    <option value="default">Relevancia</option>
+                    <option value="price-asc">Precio: menor a mayor</option>
+                    <option value="price-desc">Precio: mayor a menor</option>
+                    <option value="name-asc">Nombre: A-Z</option>
+                    <option value="name-desc">Nombre: Z-A</option>
+                </select>
+            </div>
+            <button class="btn-clear-filters" onclick="clearFilters()">Limpiar Filtros</button>
+        </div>
+    </div>
+
     <!-- Products Grid -->
     <section class="products-section">
         <div class="section-header">
@@ -107,7 +173,7 @@
         
         <div class="products-grid" id="productsGrid">
             <!-- Producto 1 -->
-            <div class="product-card" data-category="running">
+            <div class="product-card" data-category="running" data-brand="nike">
                 <div class="product-badges">
                     <span class="product-badge">Más Vendido</span>
                 </div>
@@ -139,7 +205,7 @@
             </div>
 
             <!-- Producto 2 -->
-            <div class="product-card" data-category="urban">
+            <div class="product-card" data-category="urban" data-brand="adidas">
                 <button class="product-favorite" onclick="toggleFavorite(this)">🤍</button>
                 <div class="product-image">🏃</div>
                 <div class="product-info">
@@ -164,7 +230,7 @@
             </div>
 
             <!-- Producto 3 -->
-            <div class="product-card" data-category="running">
+            <div class="product-card" data-category="running" data-brand="nike">
                 <div class="product-badges">
                     <span class="product-badge new">Nuevo</span>
                     <span class="product-badge discount">-25%</span>
@@ -196,7 +262,7 @@
             </div>
 
             <!-- Producto 4 -->
-            <div class="product-card" data-category="basketball">
+            <div class="product-card" data-category="basketball" data-brand="nike">
                 <button class="product-favorite" onclick="toggleFavorite(this)">🤍</button>
                 <div class="product-image">🔥</div>
                 <div class="product-info">
@@ -477,7 +543,249 @@
         </div>
     </div>
 
-    <!-- Cart Modal -->
+    <!-- Checkout Modal - Proceso de Compra -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="checkout-modal">
+            <!-- Progress Steps -->
+            <div class="checkout-progress">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Datos</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Envío</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Pago</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmar</div>
+                </div>
+            </div>
+            
+            <button class="checkout-close" onclick="closeCheckout()">✕</button>
+            
+            <!-- Step 1: Datos del Cliente -->
+            <div class="checkout-step active" id="checkoutStep1">
+                <h3>👤 Datos del Cliente</h3>
+                <form id="customerForm" onsubmit="return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName">Nombre Completo *</label>
+                            <input type="text" id="customerName" required placeholder="Juan Pérez García">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Correo Electrónico *</label>
+                            <input type="email" id="customerEmail" required placeholder="juan@ejemplo.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerPhone">Teléfono *</label>
+                            <input type="tel" id="customerPhone" required placeholder="+51 987 654 321">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerDni">DNI *</label>
+                            <input type="text" id="customerDni" required placeholder="12345678" maxlength="8">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddress">Dirección de Envío *</label>
+                        <input type="text" id="customerAddress" required placeholder="Av. Principal 123, Lima">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerCity">Ciudad *</label>
+                            <select id="customerCity" required>
+                                <option value="">Seleccionar ciudad</option>
+                                <option value="lima">Lima</option>
+                                <option value="callao">Callao</option>
+                                <option value="arequipa">Arequipa</option>
+                                <option value="trujillo">Trujillo</option>
+                                <option value="chiclayo">Chiclayo</option>
+                                <option value="piura">Piura</option>
+                                <option value="cusco">Cusco</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerDistrict">Distrito *</label>
+                            <input type="text" id="customerDistrict" required placeholder="Miraflores">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerNote">Notas adicionales (opcional)</label>
+                        <textarea id="customerNote" rows="2" placeholder="Referencia del domicilio, horario de entrega, etc."></textarea>
+                    </div>
+                </form>
+                <div class="checkout-actions">
+                    <button class="btn-checkout-secondary" onclick="closeCheckout()">Cancelar</button>
+                    <button class="btn-checkout-primary" onclick="goToStep(2)">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Método de Envío -->
+            <div class="checkout-step" id="checkoutStep2">
+                <h3>🚚 Método de Envío</h3>
+                <div class="shipping-options">
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="standard" checked onchange="updateShippingCost()">
+                        <div class="shipping-content">
+                            <div class="shipping-icon">📦</div>
+                            <div class="shipping-info">
+                                <div class="shipping-title">Envío Regular</div>
+                                <div class="shipping-desc">Entrega en 3-5 días hábiles</div>
+                            </div>
+                            <div class="shipping-price">S/ 15.00</div>
+                        </div>
+                    </label>
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="express" onchange="updateShippingCost()">
+                        <div class="shipping-content">
+                            <div class="shipping-icon">⚡</div>
+                            <div class="shipping-info">
+                                <div class="shipping-title">Envío Express</div>
+                                <div class="shipping-desc">Entrega en 24-48 horas</div>
+                            </div>
+                            <div class="shipping-price">S/ 25.00</div>
+                        </div>
+                    </label>
+                    <label class="shipping-option">
+                        <input type="radio" name="shipping" value="store" onchange="updateShippingCost()">
+                        <div class="shipping-content">
+                            <div class="shipping-icon">🏪</div>
+                            <div class="shipping-info">
+                                <div class="shipping-title">Recojo en Tienda</div>
+                                <div class="shipping-desc">Av. Principal 123, Lima</div>
+                            </div>
+                            <div class="shipping-price">Gratis</div>
+                        </div>
+                    </label>
+                </div>
+                <div class="checkout-actions">
+                    <button class="btn-checkout-secondary" onclick="goToStep(1)">← Atrás</button>
+                    <button class="btn-checkout-primary" onclick="goToStep(3)">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Método de Pago -->
+            <div class="checkout-step" id="checkoutStep3">
+                <h3>💳 Método de Pago</h3>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="card" checked onchange="togglePaymentFields()">
+                        <div class="payment-content">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-title">Tarjeta de Crédito/Débito</div>
+                        </div>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="yape" onchange="togglePaymentFields()">
+                        <div class="payment-content">
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-title">Yape / Plin</div>
+                        </div>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="cash" onchange="togglePaymentFields()">
+                        <div class="payment-content">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-title">Efectivo contra entrega</div>
+                        </div>
+                    </label>
+                </div>
+                
+                <!-- Card Payment Fields -->
+                <div id="cardPaymentFields" class="payment-fields">
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta *</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Fecha de Vencimiento *</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCvv">CVV *</label>
+                            <input type="text" id="cardCvv" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la Tarjeta *</label>
+                        <input type="text" id="cardName" placeholder="JUAN PÉREZ">
+                    </div>
+                </div>
+                
+                <!-- Yape Payment Fields -->
+                <div id="yapePaymentFields" class="payment-fields" style="display: none;">
+                    <div class="yape-info">
+                        <p>Escanea el código QR o usa el número:</p>
+                        <div class="yape-number">📱 987 654 321</div>
+                        <p class="yape-note">Después de pagar, ingresa el número de operación:</p>
+                        <input type="text" id="yapeReference" placeholder="Número de operación Yape/Plin">
+                    </div>
+                </div>
+                
+                <div class="checkout-actions">
+                    <button class="btn-checkout-secondary" onclick="goToStep(2)">← Atrás</button>
+                    <button class="btn-checkout-primary" onclick="goToStep(4)">Continuar →</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Confirmación -->
+            <div class="checkout-step" id="checkoutStep4">
+                <h3>✅ Confirmar Pedido</h3>
+                <div class="order-summary">
+                    <div class="summary-section">
+                        <h4>📦 Datos del Cliente</h4>
+                        <p id="summaryName"></p>
+                        <p id="summaryEmail"></p>
+                        <p id="summaryPhone"></p>
+                        <p id="summaryAddress"></p>
+                    </div>
+                    <div class="summary-section">
+                        <h4>🚚 Envío</h4>
+                        <p id="summaryShipping"></p>
+                    </div>
+                    <div class="summary-section">
+                        <h4>💳 Pago</h4>
+                        <p id="summaryPayment"></p>
+                    </div>
+                    <div class="summary-section">
+                        <h4>🛒 Productos</h4>
+                        <div id="summaryProducts"></div>
+                    </div>
+                </div>
+                <div class="order-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="summarySubtotal">S/ 0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Envío:</span>
+                        <span id="summaryShippingCost">S/ 0.00</span>
+                    </div>
+                    <div class="total-row total-final">
+                        <span>Total:</span>
+                        <span id="summaryTotal">S/ 0.00</span>
+                    </div>
+                </div>
+                <div class="checkout-actions">
+                    <button class="btn-checkout-secondary" onclick="goToStep(3)">← Atrás</button>
+                    <button class="btn-checkout-primary btn-finalize" onclick="finalizeOrder()">🎉 Confirmar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal (para ver el carrito antes del checkout) -->
     <div class="modal-overlay" id="cartModal">
         <div class="modal-box" style="max-width: 500px;">
             <div class="modal-header">
@@ -491,7 +799,7 @@
                     <span class="cart-total-label">Total:</span>
                     <span class="cart-total-amount" id="cartTotal">S/ 0.00</span>
                 </div>
-                <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+                <button class="btn-checkout" onclick="openCheckout()">Proceder al Checkout</button>
                 <button class="btn-continue-shopping" onclick="closeCart()">Seguir Comprando</button>
             </div>
         </div>

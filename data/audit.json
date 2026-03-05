@@ -518,5 +518,53 @@
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
         "created_at": "2026-03-04 12:31:54",
         "details": "El cliente gomezsanjean@gmail.com inici\u00f3 proceso de compra para: Nike ZoomX Vaporfly (Talla: 40)"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:01:19",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:01:19",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_REGISTER_PURCHASE",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:01:29",
+        "details": "El cliente gomezsanjean@gmail.com inici\u00f3 proceso de compra para: Adidas Ultraboost 22 (Talla: 40)"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:09:14",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:09:14",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_REGISTER_PURCHASE",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-05 01:11:39",
+        "details": "El cliente gomezsanjean@gmail.com inici\u00f3 proceso de compra para: Adidas Superstar Original (Talla: 40)"
     }
 ]
