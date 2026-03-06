@@ -16,19 +16,34 @@
     <div class="dashboard-layout">
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
-                <h3>CRM Ventas</h3>
-                <p>Gestión Comercial</p>
+                <div class="sidebar-brand-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 13h2v7H3v-7zm4-5h2v12H7V8zm4-3h2v15h-2V5zm4 5h2v10h-2v-10zm4-3h2v13h-2V7z"/></svg>
+                </div>
+                <div class="sidebar-brand-text">
+                    <h3>CRM Ventas</h3>
+                    <p>Gestión Comercial</p>
+                </div>
             </div>
             
             <nav class="sidebar-nav">
-                <span class="sidebar-section">VENTAS</span>
-                <a class="sidebar-link" href="<?= route('sales', 'index') ?>"><span class="icon">🛒</span>Lista de Ventas</a>
-                <a class="sidebar-link active" href="<?= route('sales', 'analytics') ?>"><span class="icon">📊</span>Analytics</a>
+                <span class="sidebar-section">Ventas</span>
+                <a class="sidebar-link" href="<?= route('sales', 'index') ?>">
+                    <span class="sidebar-link-icon">🛒</span>Lista de Ventas
+                </a>
+                <a class="sidebar-link active" href="<?= route('sales', 'analytics') ?>">
+                    <span class="sidebar-link-icon">📊</span>Analytics
+                </a>
 
-                <span class="sidebar-section">PANEL</span>
-                <a class="sidebar-link" href="<?= route('dashboard', 'index') ?>"><span class="icon">👥</span>Dashboard RRHH</a>
-                <a class="sidebar-link" href="<?= route('dashboard', 'audit') ?>"><span class="icon">📋</span>Auditoría</a>
-                <a class="sidebar-link" href="<?= route('dashboard', 'logout') ?>"><span class="icon">🚪</span>Cerrar sesión</a>
+                <span class="sidebar-section">Panel</span>
+                <a class="sidebar-link" href="<?= route('dashboard', 'index') ?>">
+                    <span class="sidebar-link-icon">👥</span>Dashboard RRHH
+                </a>
+                <a class="sidebar-link" href="<?= route('dashboard', 'audit') ?>">
+                    <span class="sidebar-link-icon">📋</span>Auditoría
+                </a>
+                <a class="sidebar-link danger-link" href="<?= route('dashboard', 'logout') ?>">
+                    <span class="sidebar-link-icon">🚪</span>Cerrar sesión
+                </a>
             </nav>
             
             <div class="sidebar-footer">
@@ -43,38 +58,45 @@
         </aside>
 
         <main class="dashboard-main">
-            <!-- Header estilo Power BI -->
+            <!-- Header moderno -->
             <div class="bi-header">
-                <h1>📊 Analytics de Ventas</h1>
-                <p>Panel de análisis y métricas en tiempo real</p>
-                <span class="bi-date">📅 <?= date('d M Y') ?></span>
+                <div class="bi-header-content">
+                    <div class="bi-header-left">
+                        <div class="bi-header-badge">Analytics en vivo</div>
+                        <h1>Analytics de Ventas</h1>
+                        <p>Panel de análisis y métricas en tiempo real</p>
+                    </div>
+                    <span class="bi-date">📅 <?= date('d M Y') ?></span>
+                </div>
             </div>
+
+            <div class="analytics-body">
 
             <!-- Quick Stats -->
             <div class="quick-stats">
                 <div class="quick-stat">
-                    <div class="quick-stat-icon" style="background: rgba(0, 120, 212, 0.1);">👁️</div>
+                    <div class="quick-stat-icon" style="background: rgba(99,102,241,0.1);">👁️</div>
                     <div class="quick-stat-info">
                         <div class="value"><?= $stats['total_client_views'] ?? 0 ?></div>
                         <div class="label">Total Vistas</div>
                     </div>
                 </div>
                 <div class="quick-stat">
-                    <div class="quick-stat-icon" style="background: rgba(16, 124, 16, 0.1);">🛒</div>
+                    <div class="quick-stat-icon" style="background: rgba(16,185,129,0.1);">🛒</div>
                     <div class="quick-stat-info">
                         <div class="value"><?= $stats['total_purchase_attempts'] ?? 0 ?></div>
                         <div class="label">Compras Iniciadas</div>
                     </div>
                 </div>
                 <div class="quick-stat">
-                    <div class="quick-stat-icon" style="background: rgba(209, 52, 56, 0.1);">❌</div>
+                    <div class="quick-stat-icon" style="background: rgba(239,68,68,0.1);">❌</div>
                     <div class="quick-stat-info">
                         <div class="value"><?= $stats['total_cancellations'] ?? 0 ?></div>
                         <div class="label">Cancelaciones</div>
                     </div>
                 </div>
                 <div class="quick-stat">
-                    <div class="quick-stat-icon" style="background: rgba(0, 183, 195, 0.1);">👤</div>
+                    <div class="quick-stat-icon" style="background: rgba(6,182,212,0.1);">👤</div>
                     <div class="quick-stat-info">
                         <div class="value"><?= $stats['unique_clients'] ?? 0 ?></div>
                         <div class="label">Clientes Únicos</div>
@@ -132,7 +154,7 @@
                 <!-- Bar Chart -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3 class="chart-title">📈 Rendimiento de Ventas</h3>
+                        <h3 class="chart-title"><span class="chart-title-icon">📈</span> Rendimiento de Ventas</h3>
                         <div class="chart-filters">
                             <button class="chart-filter active" onclick="changePeriod('hoy', this)">Hoy</button>
                             <button class="chart-filter" onclick="changePeriod('semanal', this)">Semanal</button>
@@ -148,7 +170,7 @@
                 <!-- Donut Chart -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3 class="chart-title">📊 Estado de Ventas</h3>
+                        <h3 class="chart-title"><span class="chart-title-icon">📊</span> Estado de Ventas</h3>
                     </div>
                     <div class="donut-chart">
                         <canvas id="statusChart"></canvas>
@@ -177,14 +199,12 @@
             <!-- Clientes Potenciales -->
             <div class="data-section">
                 <div class="data-section-header">
-                    <h3 class="data-section-title">⭐ Clientes Potenciales</h3>
+                    <h3 class="data-section-title"><span class="section-icon">⭐</span> Clientes Potenciales</h3>
                     <span class="status-badge warning"><?= count($stats['potential_clients'] ?? []) ?> leads</span>
                 </div>
                 
                 <?php if (empty($stats['potential_clients'])): ?>
-                    <div style="padding: 40px; text-align: center; color: #888;">
-                        No hay clientes potenciales aún
-                    </div>
+                    <div class="empty-state"><p>No hay clientes potenciales aún</p></div>
                 <?php else: ?>
                     <table class="data-table">
                         <thead>
@@ -220,14 +240,12 @@
             <!-- Actividad de Clientes -->
             <div class="data-section">
                 <div class="data-section-header">
-                    <h3 class="data-section-title">👥 Actividad de Clientes</h3>
+                    <h3 class="data-section-title"><span class="section-icon">👥</span> Actividad de Clientes</h3>
                     <span class="status-badge info"><?= count($activities ?? []) ?> clientes</span>
                 </div>
                 
                 <?php if (empty($activities)): ?>
-                    <div style="padding: 40px; text-align: center; color: #888;">
-                        No hay actividades registradas aún
-                    </div>
+                    <div class="empty-state"><p>No hay actividades registradas aún</p></div>
                 <?php else: ?>
                     <table class="data-table">
                         <thead>
@@ -270,14 +288,12 @@
             <!-- Auditoría -->
             <div class="data-section">
                 <div class="data-section-header">
-                    <h3 class="data-section-title">📋 Registro de Auditoría</h3>
+                    <h3 class="data-section-title"><span class="section-icon">📋</span> Registro de Auditoría</h3>
                     <span class="status-badge info"><?= count($salesAuditLogs ?? []) ?> eventos</span>
                 </div>
                 
                 <?php if (empty($salesAuditLogs)): ?>
-                    <div style="padding: 40px; text-align: center; color: #888;">
-                        No hay registros de auditoría aún
-                    </div>
+                    <div class="empty-state"><p>No hay registros de auditoría aún</p></div>
                 <?php else: ?>
                     <table class="data-table">
                         <thead>
@@ -312,6 +328,7 @@
                 <?php endif; ?>
             </div>
 
+            </div><!-- /analytics-body -->
         </main>
     </div>
 
