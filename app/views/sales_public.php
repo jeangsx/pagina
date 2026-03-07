@@ -59,7 +59,6 @@
                     <input type="text" id="searchInput" placeholder="Buscar zapatillas..." onkeyup="handleSearch(event)" onkeydown="if(event.key==='Enter'){triggerSearch();}">
                     <span class="search-icon" onclick="triggerSearch()" style="cursor:pointer;">🔍</span>
                 </div>
-                <button class="icon-btn" title="Favoritos">❤️</button>
                 <button class="cart-icon-btn" onclick="openCart()" title="Carrito">🛒<span id="cart-count" class="cart-count">0</span></button>
                 <div id="userArea">
                     <button class="user-btn" onclick="openLoginModal()">Mi Cuenta</button>
@@ -799,7 +798,7 @@
                     <span class="cart-total-label">Total:</span>
                     <span class="cart-total-amount" id="cartTotal">S/ 0.00</span>
                 </div>
-                <button class="btn-checkout" onclick="openCheckout()">Proceder al Checkout</button>
+                <button class="btn-checkout" onclick="checkout()">Proceder al Checkout</button>
                 <button class="btn-continue-shopping" onclick="closeCart()">Seguir Comprando</button>
             </div>
         </div>

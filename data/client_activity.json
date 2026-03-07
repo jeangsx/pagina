@@ -1,10 +1,10 @@
 {
     "gomezsanjean@gmail.com": {
         "email": "gomezsanjean@gmail.com",
-        "view_count": 14,
-        "purchase_attempts": 6,
+        "view_count": 38,
+        "purchase_attempts": 7,
         "cancelled_purchases": 0,
-        "last_activity": "2026-03-05 23:52:32",
+        "last_activity": "2026-03-06 19:18:04",
         "products_viewed": [
             "Login\/Sesi\u00f3n",
             "Login - Cat\u00e1logo"
@@ -15,5 +15,29 @@
             "Nike ZoomX Vaporfly (Talla: 40)",
             "Adidas Ultraboost 22 (Talla: 40)"
         ]
+    },
+    "hgghgvgh@gmail.com": {
+        "email": "hgghgvgh@gmail.com",
+        "view_count": 2,
+        "purchase_attempts": 0,
+        "cancelled_purchases": 0,
+        "last_activity": "2026-03-06 19:08:03",
+        "products_viewed": [
+            "Registro de cuenta",
+            "Login - Cat\u00e1logo"
+        ],
+        "products_purchased": []
+    },
+    "hjcgjfhm@gmail.com": {
+        "email": "hjcgjfhm@gmail.com",
+        "view_count": 2,
+        "purchase_attempts": 0,
+        "cancelled_purchases": 0,
+        "last_activity": "2026-03-06 19:18:35",
+        "products_viewed": [
+            "Registro de cuenta",
+            "Login - Cat\u00e1logo"
+        ],
+        "products_purchased": []
     }
 }

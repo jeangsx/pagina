@@ -100,6 +100,18 @@
         if (mobileMenuClose) {
             mobileMenuClose.addEventListener('click', closeMobileMenu);
         }
+        
+        // Cerrar menú de usuario desplegable al hacer click fuera
+        document.addEventListener('click', function(event) {
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            
+            if (userDropdownMenu && userMenuBtn) {
+                if (!userDropdownMenu.contains(event.target) && !userMenuBtn.contains(event.target)) {
+                    userDropdownMenu.classList.remove('active');
+                }
+            }
+        });
     }
 
     // ============================================
@@ -661,6 +673,13 @@
             closeLoginModal();
             showNotification('¡Bienvenido a LaPeruvianita Shoes! 👟', 'success');
             logClientAction(email, 'view_product', 'Login - Catálogo');
+            
+            // Si el usuario estaba intentando finalizar una orden, completarla automáticamente
+            if (isCheckingOut) {
+                isCheckingOut = false; // Resetear la bandera
+                // Abrir el checkout para completar el pedido
+                setTimeout(() => openCheckout(), 500);
+            }
         } else {
             showNotification(response.message || 'Error al iniciar sesión', 'error');
         }
@@ -670,15 +689,90 @@
         const userArea = document.getElementById('userArea');
         if (!userArea) return;
         
+        // Truncar el email para mostrar solo los primeros 20 caracteres
+        const displayEmail = email.length > 20 ? email.substring(0, 20) + '...' : email;
+        
         userArea.innerHTML = `
-            <div class="user-info-display">
-                <span>👤 ${email}</span>
-                <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+            <div class="user-profile-menu">
+                <button class="user-email-btn" id="userMenuBtn" title="${email}">
+                    👤 ${displayEmail}
+                    <span class="menu-arrow">▼</span>
+                </button>
+                <div class="user-dropdown-menu" id="userDropdownMenu">
+                    <div class="dropdown-header">${email}</div>
+                    <a href="#" class="dropdown-item" id="viewProfileLink">
+                        <span>📋</span> Ver Perfil
+                    </a>
+                    <a href="#" class="dropdown-item" id="editProfileLink">
+                        <span>✏️</span> Editar Perfil
+                    </a>
+                    <a href="#" class="dropdown-item" id="changePasswordLink">
+                        <span>🔐</span> Cambiar Contraseña
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item logout-item" id="logoutLink">
+                        <span>🚪</span> Cerrar Sesión
+                    </a>
+                </div>
             </div>
         `;
+        
+        // Agregar event listeners después de crear el HTML
+        setTimeout(() => {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const viewProfileLink = document.getElementById('viewProfileLink');
+            const editProfileLink = document.getElementById('editProfileLink');
+            const changePasswordLink = document.getElementById('changePasswordLink');
+            const logoutLink = document.getElementById('logoutLink');
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            
+            if (userMenuBtn) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (userDropdownMenu) {
+                        userDropdownMenu.classList.toggle('active');
+                    }
+                });
+            }
+            
+            if (viewProfileLink) {
+                viewProfileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('📋 Función de perfil en desarrollo', 'info');
+                    if (userDropdownMenu) userDropdownMenu.classList.remove('active');
+                });
+            }
+            
+            if (editProfileLink) {
+                editProfileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('✏️ Función de editar perfil en desarrollo', 'info');
+                    if (userDropdownMenu) userDropdownMenu.classList.remove('active');
+                });
+            }
+            
+            if (changePasswordLink) {
+                changePasswordLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showNotification('🔐 Función de cambiar contraseña en desarrollo', 'info');
+                    if (userDropdownMenu) userDropdownMenu.classList.remove('active');
+                });
+            }
+            
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        }, 0);
     };
 
-    window.logout = function() {
+    window.logout = function(event) {
+        if (event) {
+            event.preventDefault();
+        }
         currentUserEmail = null;
         
         const userArea = document.getElementById('userArea');
@@ -686,7 +780,32 @@
             userArea.innerHTML = '<button class="user-btn" onclick="openLoginModal()">Mi Cuenta</button>';
         }
         
+        // Limpiar carrito
+        cart = [];
+        clearCartStorage();
+        
         showNotification('Sesión cerrada correctamente', 'success');
+    };
+    
+    window.openProfileModal = function(event) {
+        event.preventDefault();
+        showNotification('📋 Función de perfil en desarrollo', 'info');
+        const menu = document.getElementById('userDropdownMenu');
+        if (menu) menu.classList.remove('active');
+    };
+    
+    window.openEditProfileModal = function(event) {
+        event.preventDefault();
+        showNotification('✏️ Función de editar perfil en desarrollo', 'info');
+        const menu = document.getElementById('userDropdownMenu');
+        if (menu) menu.classList.remove('active');
+    };
+    
+    window.openChangePasswordModal = function(event) {
+        event.preventDefault();
+        showNotification('🔐 Función de cambiar contraseña en desarrollo', 'info');
+        const menu = document.getElementById('userDropdownMenu');
+        if (menu) menu.classList.remove('active');
     };
 
     // ============================================
@@ -751,12 +870,25 @@
      * Finaliza la compra - Abre el proceso de checkout
      */
     window.checkout = function() {
-        if (cart.length === 0) {
-            showNotification('El carrito está vacío', 'error');
+        // 1. Validación estricta: Si no hay productos, NO hacer nada más
+        if (!cart || cart.length === 0) {
+            showNotification('❌ Debes seleccionar al menos un producto para continuar.', 'error');
             return;
         }
         
-        // Abrir el modal de checkout
+        // Validación adicional: Verificar que los productos tengan datos válidos
+        const validCart = cart.every(item => item.name && item.price && item.size);
+        if (!validCart) {
+            showNotification('❌ Hay productos inválidos en tu carrito. Por favor, revisa y vuelve a intentar.', 'error');
+            return;
+        }
+        
+        // Mostrar cantidad de productos en carrito
+        const itemCount = cart.length;
+        const itemText = itemCount === 1 ? 'producto' : 'productos';
+        console.log(`Iniciando checkout con ${itemCount} ${itemText}`);
+        
+        // Abrir el modal de checkout directamente
         openCheckout();
     };
     
@@ -1018,6 +1150,21 @@
      * Finaliza la compra
      */
     window.finalizeOrder = function() {
+        // VALIDACIÓN OBLIGATORIA: El usuario DEBE estar registrado para completar la compra
+        if (!currentUserEmail) {
+            showNotification('⚠️ Debes iniciar sesión o registrarte para completar tu pedido', 'warning');
+            isCheckingOut = true; // Marcar que después del login queremos finalizar la orden
+            closeCheckout();
+            openLoginModal();
+            return;
+        }
+        
+        // Validación adicional del carrito
+        if (!cart || cart.length === 0) {
+            showNotification('❌ Tu carrito está vacío. No se puede completar el pedido.', 'error');
+            return;
+        }
+        
         // Simular procesamiento
         showNotification('Procesando tu pedido...', 'info');
         
@@ -1026,8 +1173,8 @@
             var shippingCost = updateShippingCost();
             var total = subtotal + shippingCost;
             
-            // Registrar la compra
-            var customerEmail = document.getElementById('customerEmail').value;
+            // Registrar la compra con el usuario autenticado
+            var customerEmail = currentUserEmail; // Usar el email del usuario autenticado
             if (customerEmail) {
                 cart.forEach(function(item) {
                     logClientAction(customerEmail, 'register_purchase', item.name + ' (Talla: ' + item.size + ')');
@@ -1044,6 +1191,9 @@
             
             // Cerrar checkout
             closeCheckout();
+            
+            // Resetear bandera de checkout
+            isCheckingOut = false;
         }, 1500);
     };
 

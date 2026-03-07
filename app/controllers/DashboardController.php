@@ -292,4 +292,54 @@ class DashboardController
 
         redirect(route('dashboard', 'index'));
     }
+
+    public function editProfile()
+    {
+        authRequired();
+        $this->enforcePasswordUpdated();
+
+        $userId = $_SESSION['user_id'] ?? '';
+        
+        if (empty($userId)) {
+            redirect(route('auth', 'login'));
+        }
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($userId);
+
+        if (!$user) {
+            redirect(route('auth', 'login'));
+        }
+
+        require VIEW_PATH . '/edit_employee.php';
+    }
+
+    public function saveProfile()
+    {
+        authRequired();
+        $this->enforcePasswordUpdated();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirect(route('dashboard', 'index'));
+        }
+
+        $userId = $_SESSION['user_id'] ?? '';
+        
+        if (empty($userId)) {
+            redirect(route('auth', 'login'));
+        }
+
+        $payload = [];
+        $payload['full_name'] = trim($_POST['full_name'] ?? '');
+        $payload['email'] = trim($_POST['email'] ?? '');
+        $payload['phone'] = trim($_POST['phone'] ?? '');
+
+        $userModel = new UserModel();
+        $userModel->update($userId, $payload);
+
+        $_SESSION['profile_edit_message'] = 'Perfil actualizado exitosamente.';
+
+        redirect(route('dashboard', 'index'));
+    }
 }
+

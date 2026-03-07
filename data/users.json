@@ -365,5 +365,31 @@
         "password": "$2y$10$38zLudpU85w3m1JLa9Tvs.yyyZehp5vmkMoa4\/vaa4wNX53JEV4p2",
         "must_change_password": true,
         "created_at": "2026-02-27 21:42:29"
+    },
+    {
+        "id": "69ab6c63e5476",
+        "name": "hgghgvgh@gmail.com",
+        "email": "hgghgvgh@gmail.com",
+        "phone": "",
+        "type": "Cliente",
+        "department": "",
+        "position": "",
+        "hired_at": "",
+        "status": "Activo",
+        "photo_url": null,
+        "created_at": "2026-03-06 19:08:03"
+    },
+    {
+        "id": "69ab6edb4684a",
+        "name": "hjcgjfhm@gmail.com",
+        "email": "hjcgjfhm@gmail.com",
+        "phone": "",
+        "type": "Cliente",
+        "department": "",
+        "position": "",
+        "hired_at": "",
+        "status": "Activo",
+        "photo_url": null,
+        "created_at": "2026-03-06 19:18:35"
     }
 ]

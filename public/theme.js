@@ -43,5 +43,35 @@
             localStorage.setItem(storageKey, nextTheme);
             applyTheme(nextTheme);
         });
+
+        // Menú de usuario
+        const userMenuBtn = document.getElementById('user-menu-toggle');
+        const userMenu = document.getElementById('user-menu');
+
+        if (userMenuBtn && userMenu) {
+            // Abrir/cerrar menú al hacer click en el botón
+            userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userMenu.classList.toggle('open');
+                userMenuBtn.classList.toggle('active');
+            });
+
+            // Cerrar menú cuando se hace click en una opción
+            const menuItems = userMenu.querySelectorAll('.sidebar-user-menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    userMenu.classList.remove('open');
+                    userMenuBtn.classList.remove('active');
+                });
+            });
+
+            // Cerrar menú al hacer click fuera
+            document.addEventListener('click', (e) => {
+                if (!userMenuBtn.contains(e.target) && !userMenu.contains(e.target)) {
+                    userMenu.classList.remove('open');
+                    userMenuBtn.classList.remove('active');
+                }
+            });
+        }
     });
 })();
