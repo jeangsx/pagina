@@ -49,6 +49,7 @@ class SalesModel
             'product' => $data['product'] ?? '',
             'amount' => floatval($data['amount'] ?? 0),
             'status' => $data['status'] ?? 'pending', // pending, completed, cancelled
+            'payment_method' => $data['payment_method'] ?? 'pago_online', // pago_online, contra_entrega
             'notes' => $data['notes'] ?? '',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -60,8 +61,8 @@ class SalesModel
         // Intentar guardar en MySQL
         try {
             $db = Database::connect();
-            $sql = "INSERT INTO sales (id, client_email, client_name, product, amount, status, notes, created_at, updated_at)
-                    VALUES (:id, :client_email, :client_name, :product, :amount, :status, :notes, :created_at, :updated_at)";
+            $sql = "INSERT INTO sales (id, client_email, client_name, product, amount, status, payment_method, notes, created_at, updated_at)
+                    VALUES (:id, :client_email, :client_name, :product, :amount, :status, :payment_method, :notes, :created_at, :updated_at)";
             $stmt = $db->prepare($sql);
             $stmt->execute([
                 ':id' => $sale['id'],
@@ -70,6 +71,7 @@ class SalesModel
                 ':product' => $sale['product'],
                 ':amount' => $sale['amount'],
                 ':status' => $sale['status'],
+                ':payment_method' => $sale['payment_method'],
                 ':notes' => $sale['notes'],
                 ':created_at' => $sale['created_at'],
                 ':updated_at' => $sale['updated_at']
@@ -146,6 +148,7 @@ class SalesModel
                 $sale['product'] = $data['product'] ?? $sale['product'];
                 $sale['amount'] = isset($data['amount']) ? floatval($data['amount']) : $sale['amount'];
                 $sale['status'] = $data['status'] ?? $sale['status'];
+                $sale['payment_method'] = $data['payment_method'] ?? $sale['payment_method'] ?? 'pago_online';
                 $sale['notes'] = $data['notes'] ?? $sale['notes'];
                 $sale['updated_at'] = date('Y-m-d H:i:s');
                 $updated = true;
@@ -162,8 +165,8 @@ class SalesModel
             try {
                 $db = Database::connect();
                 $sql = "UPDATE sales SET client_email=:client_email, client_name=:client_name, 
-                        product=:product, amount=:amount, status=:status, notes=:notes, 
-                        updated_at=:updated_at WHERE id=:id";
+                        product=:product, amount=:amount, status=:status, payment_method=:payment_method, 
+                        notes=:notes, updated_at=:updated_at WHERE id=:id";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([
                     ':id' => $id,
@@ -172,6 +175,7 @@ class SalesModel
                     ':product' => $updatedSale['product'],
                     ':amount' => $updatedSale['amount'],
                     ':status' => $updatedSale['status'],
+                    ':payment_method' => $updatedSale['payment_method'],
                     ':notes' => $updatedSale['notes'],
                     ':updated_at' => $updatedSale['updated_at']
                 ]);

@@ -80,7 +80,7 @@ $activeView = in_array($view, ['table', 'gallery'], true) ? $view : 'table';
             <h1>Dashboard Principal</h1>
 
             <div class="module-headline">
-                <h2>Centro de Control - LaPeruvianita</h2>
+                <h2>Centro de Control - Chenati Sports</h2>
                 <p>Resumen de ventas y métricas en tiempo real</p>
             </div>
 
@@ -96,7 +96,15 @@ $activeView = in_array($view, ['table', 'gallery'], true) ? $view : 'table';
                     $ventasCompletadas = count(array_filter($salesData, function($s) { return ($s['status'] ?? '') === 'completed'; }));
                     $ventasPendientes = count(array_filter($salesData, function($s) { return ($s['status'] ?? '') === 'pending'; }));
                     $ventasCanceladas = count(array_filter($salesData, function($s) { return ($s['status'] ?? '') === 'cancelled'; }));
-                    $ingresosTotales = array_sum(array_column($salesData, 'amount'));
+                    
+                    // Ingresos: solo ventas completadas con pago en línea
+                    $ingresosTotales = array_sum(array_map(function($s) {
+                        if (($s['status'] ?? '') === 'completed' && ($s['payment_method'] ?? 'pago_online') === 'pago_online') {
+                            return floatval($s['amount'] ?? 0);
+                        }
+                        return 0;
+                    }, $salesData));
+                    
                     $clientesUnicos = count(array_unique(array_column($salesData, 'client_email')));
                     
                     $salesStats = [

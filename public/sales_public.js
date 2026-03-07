@@ -1,5 +1,5 @@
 /**
- * LaPeruvianita Shoes - Funcionalidad de Tienda Online
+ * Chenati Sports - Funcionalidad de Tienda Online
  */
 
 (function() {
@@ -18,7 +18,7 @@
     // Carrito Persistente con localStorage
     // ============================================
     
-    const CART_STORAGE_KEY = 'laperuvianita_cart';
+    const CART_STORAGE_KEY = 'chenati_sports_cart';
     
     function saveCartToStorage() {
         try {
@@ -53,7 +53,7 @@
     // Inicialización
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('LaPeruvianita Shoes - Tienda Online Cargada');
+        console.log('Chenati Sports - Tienda Online Cargada');
         
         // Cargar carrito desde localStorage
         loadCartFromStorage();
@@ -671,7 +671,7 @@
             currentUserEmail = email;
             updateUserArea(email);
             closeLoginModal();
-            showNotification('¡Bienvenido a LaPeruvianita Shoes! 👟', 'success');
+            showNotification('¡Bienvenido a Chenati Sports! 👟', 'success');
             logClientAction(email, 'view_product', 'Login - Catálogo');
             
             // Si el usuario estaba intentando finalizar una orden, completarla automáticamente

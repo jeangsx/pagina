@@ -838,5 +838,85 @@
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Code\/1.110.0 Chrome\/142.0.7444.265 Electron\/39.6.0 Safari\/537.36",
         "created_at": "2026-03-06 19:18:35",
         "details": "El cliente hjcgjfhm@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 19:51:47",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 19:51:47",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 19:58:05",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 19:58:05",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "ngfbfbgfh@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Code\/1.110.0 Chrome\/142.0.7444.265 Electron\/39.6.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:02",
+        "details": "El cliente ngfbfbgfh@gmail.com visualiz\u00f3 el producto: Registro de cuenta"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "ngfbfbgfh@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Code\/1.110.0 Chrome\/142.0.7444.265 Electron\/39.6.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:02",
+        "details": "El cliente ngfbfbgfh@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:33",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:33",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:53",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login\/Sesi\u00f3n"
+    },
+    {
+        "event": "CLIENT_ACTION_VIEW_PRODUCT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-06 20:05:53",
+        "details": "El cliente gomezsanjean@gmail.com visualiz\u00f3 el producto: Login - Cat\u00e1logo"
     }
 ]

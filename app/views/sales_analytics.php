@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics de Ventas - CRM LaPeruvianita</title>
+    <title>Analytics de Ventas - CRM Chenati Sports</title>
     <link rel="stylesheet" href="<?= asset('estilos.css') ?>">
     <link rel="stylesheet" href="<?= asset('dashboard.css') ?>">
     <link rel="stylesheet" href="<?= asset('sales_analytics.css') ?>">
@@ -47,11 +47,24 @@
             </nav>
             
             <div class="sidebar-footer">
-                <div class="sidebar-user">
-                    <div class="sidebar-user-avatar">A</div>
-                    <div class="sidebar-user-info">
-                        <div class="sidebar-user-name">Administrador</div>
-                        <div class="sidebar-user-role">Gerente</div>
+                <div class="sidebar-user-container">
+                    <button class="sidebar-user" id="user-menu-toggle" type="button">
+                        <div class="sidebar-user-avatar">A</div>
+                        <div class="sidebar-user-info">
+                            <div class="sidebar-user-name">Administrador</div>
+                            <div class="sidebar-user-role">Gerente</div>
+                        </div>
+                        <span class="sidebar-user-toggle-icon">⋮</span>
+                    </button>
+                    <div class="sidebar-user-menu" id="user-menu">
+                        <a href="<?= route('dashboard', 'editProfile') ?>" class="sidebar-user-menu-item">
+                            <span class="menu-icon">👤</span>
+                            <span class="menu-text">Editar perfil</span>
+                        </a>
+                        <a href="<?= route('dashboard', 'logout') ?>" class="sidebar-user-menu-item sidebar-user-menu-logout">
+                            <span class="menu-icon">🚪</span>
+                            <span class="menu-text">Cerrar sesión</span>
+                        </a>
                     </div>
                 </div>
             </div>

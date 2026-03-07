@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Peruvianita Shoes - Tienda Online de Zapatillas</title>
+    <title>Chenati Sports - Tienda Online de Zapatillas</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,49 +20,63 @@
     <!-- Header -->
     <header class="store-header">
         <div class="header-top">
-            🚚 Envío gratis en pedidos mayores a S/200 | ⚡ Entregas en 24 horas | 🎁 ¡Primer pedido 20% dto!
+            <div class="header-top-content">
+                <span>🚚 Envío gratis en pedidos mayores a S/200</span>
+                <span>⚡ Entregas en 24 horas</span>
+                <span>🎁 ¡Primer pedido 20% dto!</span>
+            </div>
         </div>
         <div class="header-main">
-            <a href="#" class="logo">SENATI<span>Sports</span>           UR</a>
+            <div class="header-left">
+                <a href="#" class="logo">
+                    <span class="logo-iconic">🏃</span>
+                    <span class="logo-text">Chenati</span><span class="logo-accent">Sports</span>
+                </a>
+            </div>
             
-            <ul class="nav-links">
-                <li class="nav-item">
-                    <a id="nav-nuevo" onclick="showNuevo(event)">Nuevo</a>
-                </li>
-                <li class="nav-item">
-                    <a id="nav-hombres" onclick="showHombres(event)">Hombres</a>
-                </li>
-                <li class="nav-item">
-                    <a id="nav-mujeres" onclick="showMujeres(event)">Mujeres</a>
-                </li>
-                <li class="nav-item">
-                    <a id="nav-ninos" onclick="showNinos(event)">Niños</a>
-                </li>
-                <li class="nav-item">
-                    <a onclick="filterProducts('running', event)">Running</a>
-                </li>
-                <li class="nav-item">
-                    <a onclick="filterProducts('urban', event)">Urbanas</a>
-                </li>
-                <li class="nav-item">
-                    <a id="nav-ofertas" onclick="showOfertas(event)">Ofertas</a>
-                </li>
-            </ul>
+            <nav class="header-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a id="nav-nuevo" onclick="showNuevo(event)">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-hombres" onclick="showHombres(event)">Hombres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-mujeres" onclick="showMujeres(event)">Mujeres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-ninos" onclick="showNinos(event)">Niños</a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="filterProducts('running', event)">Running</a>
+                    </li>
+                    <li class="nav-item">
+                        <a onclick="filterProducts('urban', event)">Urbanas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-ofertas" onclick="showOfertas(event)">Ofertas</a>
+                    </li>
+                </ul>
+            </nav>
 
             <div class="header-actions">
-                <button class="hamburger-btn" onclick="toggleMobileMenu()">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Buscar zapatillas..." onkeyup="handleSearch(event)" onkeydown="if(event.key==='Enter'){triggerSearch();}">
+                    <span class="search-icon" onclick="triggerSearch()" title="Buscar">🔍</span>
+                </div>
+                <button class="cart-icon-btn" onclick="openCart()" title="Carrito">
+                    <span class="cart-icon">🛒</span>
+                    <span id="cart-count" class="cart-count">0</span>
+                </button>
+                <div id="userArea">
+                    <button class="user-btn" onclick="openLoginModal()">👤 Mi Cuenta</button>
+                </div>
+                <button class="hamburger-btn" onclick="toggleMobileMenu()" title="Menú">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Buscar zapatillas..." onkeyup="handleSearch(event)" onkeydown="if(event.key==='Enter'){triggerSearch();}">
-                    <span class="search-icon" onclick="triggerSearch()" style="cursor:pointer;">🔍</span>
-                </div>
-                <button class="cart-icon-btn" onclick="openCart()" title="Carrito">🛒<span id="cart-count" class="cart-count">0</span></button>
-                <div id="userArea">
-                    <button class="user-btn" onclick="openLoginModal()">Mi Cuenta</button>
-                </div>
             </div>
         </div>
     </header>
@@ -424,7 +438,7 @@
     <footer class="store-footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>LaPeruvianita Shoes</h4>
+                <h4>Chenati Sports</h4>
                 <ul>
                     <li><a href="#">Sobre Nosotros</a></li>
                     <li><a href="#">Nuestras Tiendas</a></li>
@@ -461,7 +475,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 LaPeruvianita Shoes. Todos los derechos reservados.</p>
+            <p>© 2026 Chenati Sports. Todos los derechos reservados.</p>
             <p>Diseñado con ❤️ para los amantes del calzado</p>
         </div>
     </footer>
@@ -470,7 +484,7 @@
     <div class="modal-overlay" id="loginModal">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>👟 Bienvenido a LaPeruvianita Shoes</h3>
+                <h3>👟 Bienvenido a Chenati Sports</h3>
             </div>
             <div class="modal-body">
                 <p style="text-align: center; color: #666; margin-bottom: 20px; font-size: 14px;">

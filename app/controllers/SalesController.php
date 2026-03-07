@@ -78,6 +78,7 @@ class SalesController
             'product' => trim($_POST['product'] ?? ''),
             'amount' => floatval($_POST['amount'] ?? 0),
             'status' => $_POST['status'] ?? 'pending',
+            'payment_method' => $_POST['payment_method'] ?? 'pago_online',
             'notes' => trim($_POST['notes'] ?? '')
         ];
 
@@ -145,6 +146,7 @@ class SalesController
             'product' => trim($_POST['product'] ?? ''),
             'amount' => floatval($_POST['amount'] ?? 0),
             'status' => $_POST['status'] ?? 'pending',
+            'payment_method' => $_POST['payment_method'] ?? 'pago_online',
             'notes' => trim($_POST['notes'] ?? '')
         ];
 

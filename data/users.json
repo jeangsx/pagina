@@ -391,5 +391,18 @@
         "status": "Activo",
         "photo_url": null,
         "created_at": "2026-03-06 19:18:35"
+    },
+    {
+        "id": "69ab79beb9450",
+        "name": "ngfbfbgfh@gmail.com",
+        "email": "ngfbfbgfh@gmail.com",
+        "phone": "",
+        "type": "Cliente",
+        "department": "",
+        "position": "",
+        "hired_at": "",
+        "status": "Activo",
+        "photo_url": null,
+        "created_at": "2026-03-06 20:05:02"
     }
 ]

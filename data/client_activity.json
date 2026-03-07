@@ -1,10 +1,10 @@
 {
     "gomezsanjean@gmail.com": {
         "email": "gomezsanjean@gmail.com",
-        "view_count": 38,
+        "view_count": 46,
         "purchase_attempts": 7,
         "cancelled_purchases": 0,
-        "last_activity": "2026-03-06 19:18:04",
+        "last_activity": "2026-03-06 20:05:53",
         "products_viewed": [
             "Login\/Sesi\u00f3n",
             "Login - Cat\u00e1logo"
@@ -34,6 +34,18 @@
         "purchase_attempts": 0,
         "cancelled_purchases": 0,
         "last_activity": "2026-03-06 19:18:35",
+        "products_viewed": [
+            "Registro de cuenta",
+            "Login - Cat\u00e1logo"
+        ],
+        "products_purchased": []
+    },
+    "ngfbfbgfh@gmail.com": {
+        "email": "ngfbfbgfh@gmail.com",
+        "view_count": 2,
+        "purchase_attempts": 0,
+        "cancelled_purchases": 0,
+        "last_activity": "2026-03-06 20:05:02",
         "products_viewed": [
             "Registro de cuenta",
             "Login - Cat\u00e1logo"
