@@ -40,7 +40,7 @@ $activeView = in_array($view, ['table', 'gallery'], true) ? $view : 'table';
             <a class="sidebar-link" href="<?= route('sales', 'analytics') ?>">
                 <span class="sidebar-link-icon">📊</span>Analytics
             </a>
-            <a class="sidebar-link" href="<?= route('sales', 'publicSalesPage') ?>" target="_blank">
+            <a class="sidebar-link" href="<?= asset('chenati-landing.php') ?>" target="_blank">
                 <span class="sidebar-link-icon">🌐</span>Página de Ventas
             </a>
             <span class="sidebar-section">Usuarios</span>
@@ -170,7 +170,7 @@ $activeView = in_array($view, ['table', 'gallery'], true) ? $view : 'table';
                     <h4 style="margin: 0 0 8px 0;">➕ Nueva Venta</h4>
                     <p style="margin: 0; font-size: 13px; opacity: 0.9;">Registrar una nueva venta</p>
                 </a>
-                <a href="<?= route('sales', 'publicSalesPage') ?>" target="_blank" style="display: block; padding: 20px; background: linear-gradient(135deg, #8764b8, #6b4f9e); color: white; border-radius: 8px; text-decoration: none; transition: transform 0.2s;">
+                <a href="<?= asset('chenati-landing.php') ?>" target="_blank" style="display: block; padding: 20px; background: linear-gradient(135deg, #8764b8, #6b4f9e); color: white; border-radius: 8px; text-decoration: none; transition: transform 0.2s;">
                     <h4 style="margin: 0 0 8px 0;">🛒 Tienda Online</h4>
                     <p style="margin: 0; font-size: 13px; opacity: 0.9;">Ver página pública</p>
                 </a>
