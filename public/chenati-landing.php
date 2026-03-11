@@ -15,11 +15,11 @@
                 <span class="logo-text">Chenati Sports</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#hombre">Hombre</a></li>
-                <li><a href="#mujer">Mujer</a></li>
-                <li><a href="#ninos">Niños</a></li>
-                <li><a href="#ofertas">Ofertas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="hombre.php">Hombre</a></li>
+                <li><a href="mujer.php">Mujer</a></li>
+                <li><a href="ninos.php">Niños</a></li>
+                <li><a href="ofertas.php">Ofertas</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="nav-cart">
@@ -28,7 +28,13 @@
                         <span class="cart-count" id="cart-count">0</span>
                     </button>
                 </div>
-                <a href="index.php?controller=auth&action=login" class="btn btn-nav-login">Iniciar sesión</a>
+                <div class="nav-auth">
+                    <button class="btn btn-nav-login" id="login-btn">Iniciar sesión</button>
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <span class="user-name" id="user-name"></span>
+                        <button class="btn btn-logout" id="logout-btn">Cerrar sesión</button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -552,6 +558,46 @@
                 <div class="checkout-navigation">
                     <button class="btn btn-secondary" id="prev-step">Anterior</button>
                     <button class="btn btn-primary" id="next-step">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content modal-login">
+            <button class="modal-close" aria-label="Cerrar modal">&times;</button>
+            <div class="login-container">
+                <h2>Iniciar Sesión</h2>
+                <p class="login-subtitle">Accede a tu cuenta Chenati Sports</p>
+                
+                <form class="login-form" id="modal-login-form">
+                    <div class="form-row">
+                        <input type="text" id="modal-login-name" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" id="modal-login-email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="password" id="modal-login-password" placeholder="Contraseña" required>
+                    </div>
+                    <div class="login-options">
+                        <label class="checkbox-custom">
+                            <input type="checkbox" id="remember-me">
+                            <span>Recuérdame</span>
+                        </label>
+                        <a href="index.php?controller=auth&action=forgot" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </form>
+
+                <button class="btn btn-primary" id="modal-login-submit" style="width: 100%; margin-top: 20px;">Iniciar Sesión</button>
+
+                <div class="login-security">
+                    🔒 Tu información está protegida con encriptación SSL 256-bit
+                </div>
+
+                <div class="login-footer">
+                    <p>¿No tienes cuenta? <a href="index.php?controller=auth&action=register" class="register-link">Crear cuenta aquí</a></p>
                 </div>
             </div>
         </div>

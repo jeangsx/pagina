@@ -720,6 +720,128 @@ const PRODUCTS_DATABASE = {
         }
     };
 
+    // ===== Login Modal Handler =====
+    const setupLoginModal = () => {
+        const loginBtn = document.getElementById('login-btn');
+        const loginForm = document.getElementById('modal-login-form');
+        const submitBtn = document.getElementById('modal-login-submit');
+
+        if (loginBtn) {
+            loginBtn.addEventListener('click', function() {
+                openModal('login-modal');
+            });
+        }
+
+        if (submitBtn) {
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleModalLogin();
+            });
+        }
+
+        if (loginForm) {
+            loginForm.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleModalLogin();
+                }
+            });
+        }
+    };
+
+    const handleModalLogin = () => {
+        const name = document.getElementById('modal-login-name').value.trim();
+        const email = document.getElementById('modal-login-email').value.trim();
+        const password = document.getElementById('modal-login-password').value.trim();
+        const rememberMe = document.getElementById('remember-me')?.checked;
+
+        // Validar que los campos no estén vacíos
+        if (!name || !email || !password) {
+            showNotification('Por favor completa todos los campos');
+            return;
+        }
+
+        // Validar formato de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showNotification('Por favor ingresa un email válido');
+            return;
+        }
+
+        // Mostrar estado de carga
+        const submitBtn = document.getElementById('modal-login-submit');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verificando...';
+
+        // Simular verificación (en producción, sería AJAX a tu backend)
+        setTimeout(() => {
+            // Guardar en sessionStorage
+            const userData = {
+                name: name,
+                email: email,
+                loginTime: new Date().toISOString(),
+                rememberMe: rememberMe
+            };
+            
+            sessionStorage.setItem('chenati_user', JSON.stringify(userData));
+            
+            if (rememberMe) {
+                localStorage.setItem('chenati_remember_email', email);
+                localStorage.setItem('chenati_remember_name', name);
+            }
+
+            showNotification(`¡Bienvenido ${name}!`);
+            
+            // Limpiar formulario
+            document.getElementById('modal-login-form').reset();
+            closeModal('login-modal');
+            
+            // Actualizar navbar
+            updateUserNavbar();
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }, 1500);
+    };
+
+    const updateUserNavbar = () => {
+        const user = JSON.parse(sessionStorage.getItem('chenati_user'));
+        const loginBtn = document.getElementById('login-btn');
+        const userMenu = document.getElementById('user-menu');
+        const userName = document.getElementById('user-name');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (user) {
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (userMenu) {
+                userMenu.style.display = 'flex';
+                if (userName) userName.textContent = `Bienvenido, ${user.name}`;
+            }
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', handleLogout);
+            }
+        } else {
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (userMenu) userMenu.style.display = 'none';
+        }
+    };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('chenati_user');
+        localStorage.removeItem('chenati_remember_email');
+        localStorage.removeItem('chenati_remember_name');
+        
+        showNotification('Sesión cerrada');
+        
+        const loginBtn = document.getElementById('login-btn');
+        const userMenu = document.getElementById('user-menu');
+        
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (userMenu) userMenu.style.display = 'none';
+        
+        window.location.reload();
+    };
+
     // ===== Initialize All Features =====
     const init = () => {
         if (document.readyState === 'loading') {
@@ -732,6 +854,8 @@ const PRODUCTS_DATABASE = {
     const initializeApp = () => {
         updateCartDisplay();
         setupModalCloseButtons();
+        setupLoginModal();
+        updateUserNavbar();
         setupProductDetailActions();
         setupCartButton();
         setupCheckoutButton();

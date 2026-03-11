@@ -950,5 +950,189 @@
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36 Edg\/145.0.0.0",
         "created_at": "2026-03-09 14:06:14",
         "details": "Login exitoso"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:20",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:29",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:36",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:41",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:48",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:18:55",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:19:13",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:19:36",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36 Edg\/145.0.0.0",
+        "created_at": "2026-03-09 18:19:37",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:19:43",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:19:48",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:19:54",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:20:02",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:20:15",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:20:21",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:20:27",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36 Edg\/145.0.0.0",
+        "created_at": "2026-03-09 18:21:42",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36 Edg\/145.0.0.0",
+        "created_at": "2026-03-09 18:22:00",
+        "details": "Login exitoso"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:23:35",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_FAILED_OTP",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:30:07",
+        "details": "C\u00f3digo incorrecto o expirado"
+    },
+    {
+        "event": "EVENT_FAILED_OTP",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:30:13",
+        "details": "C\u00f3digo incorrecto o expirado"
+    },
+    {
+        "event": "EVENT_LOGIN_ATTEMPT",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:37:50",
+        "details": "Credenciales v\u00e1lidas, OTP enviado por correo"
+    },
+    {
+        "event": "EVENT_LOGIN",
+        "email": "gomezsanjean@gmail.com",
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/145.0.0.0 Safari\/537.36",
+        "created_at": "2026-03-09 18:38:11",
+        "details": "Login exitoso"
     }
 ]

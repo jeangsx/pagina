@@ -159,6 +159,49 @@ a:hover {
     transition: var(--transition);
 }
 
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-name {
+    font-size: 14px;
+    color: var(--color-dark-gray);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-name::before {
+    content: "👤";
+    font-size: 16px;
+}
+
+.btn-logout {
+    font-size: 13px;
+    color: white;
+    background-color: #FF3B30;
+    font-weight: 500;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: #FF453A;
+    opacity: 0.9;
+}
+
 /* Hero Section */
 .hero {
     width: 100%;
@@ -1863,6 +1906,126 @@ a.product-link {
 
 .confirmation-message p:last-child {
     margin-bottom: 0;
+}
+
+/* Login Modal Styles */
+.modal-login {
+    max-width: 450px;
+    width: 90%;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.login-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin: 0;
+}
+
+.login-subtitle {
+    font-size: 16px;
+    color: var(--color-body-gray);
+    margin: 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login-form input {
+    padding: 12px 16px;
+    border: 1px solid #E5E5E7;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-family: var(--font-family);
+    transition: var(--transition);
+    background-color: var(--color-white);
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.checkbox-custom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--color-body-gray);
+    user-select: none;
+}
+
+.checkbox-custom input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-accent-blue);
+}
+
+.forgot-password {
+    color: var(--color-accent-blue);
+    font-size: 14px;
+}
+
+.forgot-password:hover {
+    opacity: 0.7;
+}
+
+.login-security {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: var(--color-light-gray);
+    border-radius: var(--border-radius);
+    font-size: 13px;
+    color: var(--color-body-gray);
+    text-align: center;
+    justify-content: center;
+}
+
+.login-footer {
+    text-align: center;
+    border-top: 1px solid #E5E5E7;
+    padding-top: 24px;
+    margin-top: 16px;
+}
+
+.login-footer p {
+    font-size: 14px;
+    color: var(--color-body-gray);
+    margin: 0;
+}
+
+.register-link {
+    color: var(--color-accent-blue);
+    font-weight: 600;
+}
+
+.register-link:hover {
+    opacity: 0.7;
 }
 
 /* Print Styles */

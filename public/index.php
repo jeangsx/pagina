@@ -1,4 +1,10 @@
 <?php
+// Si no hay parámetros, redirigir a la página de inicio de la tienda
+if (empty($_GET)) {
+    include 'chenati-landing.php';
+    exit;
+}
+
 require_once __DIR__ . '/../config.php';
 
 $controller = $_GET['controller'] ?? 'auth';
